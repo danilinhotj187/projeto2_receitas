@@ -1,176 +1,50 @@
-<!DOCTYPE html> 
-<html lang="pt-br"> 
-<head> 
-<meta charset="UTF-8"> 
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-{% load static %}
-<title>Minhas Receitas</title> 
-<script src="https://cdn.tailwindcss.com"></script> <!-- Esta tag serve para 
-importar o Tailwind CSS na sua página web de forma rápida e prática, direto 
-via CDN (Content Delivery Network). --> 
-<link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css integrity="sha512
-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vj
- bZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" 
-referrerpolicy="no-referrer" /> 
- 
-    <style>  
-        body { 
-            font-family: 'Inter', sans-serif; 
-        } 
-    </style> 
-</head> 
-<body class="bg-gray-100 text-gray-900"> <!--Este comando HTML e CSS 
-significa que a página terá um fundo cinza claro e texto cinza escuro.--> 
-    <!-- Cabeçalho da Página --> 
-    <header class="bg-gray-900 text-white p-6 shadow-lg rounded-b-lg"> 
-        <div class="container mx-auto flex flex-col sm:flex-row items-center justify-center"> <!-- Alterado para 'justify-center' para centralizar o conteúdo --> 
-            <!-- Agrupamento para o Ícone e Título (Centralizado) --> 
-            <div class="flex items-center mb-4 sm:mb-0"> 
-                <div class="text-4xl mr-4"> 
-                    <i class="fas fa-utensils"></i> <!-- Ícone de utensílios (faca e garfo) --> 
-                </div> 
-                <!-- Título da Página --> 
-                <h1 class="text-4xl font-bold text-center sm:text-left"> 
-                    Minhas Receitas Deliciosas 
-                </h1> 
-            </div> 
-            <nav class="mt-4 sm:mt-0"> 
-                <!-- Conteúdo de navegação futuro aqui --> 
-            </nav> 
-        </div> 
-    </header>
-<!-- START: Seção de Pesquisa Adicionada --> 
-    <section class="container mx-auto mt-8 p-4 flex justify-center">
-    <form method="get" action="{% url 'pesquisar_receitas' %}"
-          class="w-full max-w-lg flex bg-white rounded-full shadow-md 
-overflow-hidden">
-       <input name="q"
-           type="text" 
-           placeholder="Pesquisar receitas..." 
-           class="flex-grow p-3 text-gray-700 focus:outline-none 
-focus:ring-2 focus:ring-orange-500 rounded-l-full pl-5">
+{%extends 'receitas/base.html' %}
 
-       <button type="submit"
-       class="bg-orange-500 hover:bg-orange-600 text-white 
-p-3 px-6 rounded-r-full transition duration-300 ease-in-out flex items
-center justify-center"> 
-       <i class="fas fa-search mr-2"></i> Pesquisar 
-       </button> 
-    </form> 
-    </section> 
-<!-- END: Seção de Pesquisa Adicionada -->
+{% block title %}Home - Minhas Receitas{% endblock %}
 
-<!-- START: Conteúdo Principal da Página com Containers de Receitas --> 
-    <main class="container mx-auto p-6 mt-8 bg-white rounded-lg shadow
-md"> 
-        <!-- Título da seção de receitas --> 
-        <h2 class="text-2xl font-semibold mb-6 text-center">Nossas 
-Últimas Receitas</h2> 
-        <!-- Container Flexível para as Receitas --> 
-        <div class="flex flex-wrap justify-center gap-6"> 
-            <!-- Receita 1 --> 
-            <div class="w-full sm:w-[calc(50%-1.5rem)] lg:w
-[calc(33.333%-1.5rem)] bg-gray-50 p-6 rounded-lg shadow-md hover:shadow
-lg transition-shadow duration-300 ease-in-out"> 
-<img src="{% static 'receitas/img/bolo_chocolate.jpg' %}" 
-alt="[Imagem de Bolo de Chocolate]" class="w-full h-48 object-cover 
-rounded-md mb-4"> 
-                <h3 class="text-xl font-bold mb-2 text-gray-800">Receita 
-de Bolo de Chocolate</h3> 
-                <p class="text-gray-600 mb-4">Um bolo clássico, úmido e 
-delicioso, perfeito para qualquer ocasião.</p> 
-                <a href="{% url 'receita_detail' id=1 %}" class="text-orange-600 hover:text-orange-800 
-font-semibold">Ver Receita &rarr;</a> 
-            </div> 
-<!-- Obs. Copiar toda a <div class da primeira receita e colar nas demais 
-receitas, modificar apenas o título --> 
-            <!-- Receita 2 --> 
-            <div class="w-full sm:w-[calc(50%-1.5rem)] lg:w
-[calc(33.333%-1.5rem)] bg-gray-50 p-6 rounded-lg shadow-md hover:shadow
-lg transition-shadow duration-300 ease-in-out"> 
-<img src="{% static 'receitas/img/frango_assado.jpeg' %}" 
-alt="[Imagem de Frango Assado]" class="w-full h-48 object-cover 
-rounded-md mb-4"> 
-            <h3 class="text-xl font-bold mb-2 text-gray-800">Frango 
-Assado com Ervas</h3> 
-            <p class="text-gray-600 mb-4">Uma receita simples e saborosa 
-de frango assado com um toque de ervas frescas.</p> 
-            <a href="{% url 'receita_detail' id=2 %}" class="text-orange-600 hover:text-orange-800 
-font-semibold">Ver Receita &rarr;</a> 
-            </div> 
- 
-            <!-- Receita 3 --> 
-            <div class="w-full sm:w-[calc(50%-1.5rem)] lg:w
-[calc(33.333%-1.5rem)] bg-gray-50 p-6 rounded-lg shadow-md hover:shadow
-lg transition-shadow duration-300 ease-in-out"> 
-<img src="{% static 'receitas/img/salada_mediterranea.jpg' %}" alt="[Imagem de 
-Salada Mediterrânea]" class="w-full h-48 object-cover rounded-md mb-4"> 
-                <h3 class="text-xl font-bold mb-2 text-gray-800">Salada 
-Mediterrânea Fresca</h3> 
-                <p class="text-gray-600 mb-4">Uma salada leve e 
-refrescante, cheia de sabores do Mediterrâneo.</p> 
-                <a href="{% url 'receita_detail' id=3 %}" class="text-orange-600 hover:text-orange-800 
-font-semibold">Ver Receita &rarr;</a> 
-            </div> 
- 
-            <!-- Receita 4 --> 
-            <div class="w-full sm:w-[calc(50%-1.5rem)] lg:w
-[calc(33.333%-1.5rem)] bg-gray-50 p-6 rounded-lg shadow-md hover:shadow
-lg transition-shadow duration-300 ease-in-out"> 
-<img src="{% static 'receitas/img/torta_limao.jpg' %}" alt="[Imagem de 
-Torta de Limão]" class="w-full h-48 object-cover rounded-md mb-4">
-                <h3 class="text-xl font-bold mb-2 text-gray-800">Torta de 
-Limão Cremosa</h3> 
-                <p class="text-gray-600 mb-4">Uma torta clássica com 
-recheio de limão azedinho e merengue tostado.</p> 
-                <a href="{% url 'receita_detail' id=4 %}" class="text-orange-600 hover:text-orange-800 
-font-semibold">Ver Receita &rarr;</a> 
-            </div> 
- 
-            <!-- Receita 5 --> 
-            <div class="w-full sm:w-[calc(50%-1.5rem)] lg:w
-[calc(33.333%-1.5rem)] bg-gray-50 p-6 rounded-lg shadow-md hover:shadow
-lg transition-shadow duration-300 ease-in-out"> 
-<img src="{% static 'receitas/img/sopa_legumes.jpg' %}" alt="[Imagem de 
-Sopa de Legumes]" class="w-full h-48 object-cover rounded-md mb-4">
-                <h3 class="text-xl font-bold mb-2 text-gray-800">Sopa de 
-Legumes Nutritiva</h3> 
-                <p class="text-gray-600 mb-4">Uma sopa reconfortante e 
-cheia de vegetais frescos, perfeita para dias frios.</p> 
-                <a href="{% url 'receita_detail' id=5 %}" class="text-orange-600 hover:text-orange-800 
-font-semibold">Ver Receita &rarr;</a> 
-            </div> 
- 
-            <!-- Receita 6 --> 
-            <div class="w-full sm:w-[calc(50%-1.5rem)] lg:w
-[calc(33.333%-1.5rem)] bg-gray-50 p-6 rounded-lg shadow-md hover:shadow
-lg transition-shadow duration-300 ease-in-out"> 
-<img src="{% static 'receitas/img/risoto_cogumelos.jpeg' %}" alt="[Imagem de 
-Risoto de Cogumelos]" class="w-full h-48 object-cover rounded-md mb-4">
-                <h3 class="text-xl font-bold mb-2 text-gray-800">Risoto 
-de Cogumelos Selvagens</h3> 
-                <p class="text-gray-600 mb-4">Um risoto cremoso e 
-aromático, com uma mistura rica de cogumelos selvagens.</p> 
-                <a href="{% url 'receita_detail' id=6 %}" class="text-orange-600 hover:text-orange-800 
-font-semibold">Ver Receita &rarr;</a> 
-            </div> 
-        </div> 
-    </main> 
-    <!-- END: Conteúdo Principal da Página com Containers de Receitas --> 
+{% block content %}
 
-    <!-- Conteúdo Principal da Página --> 
-    <!-- <main class="container mx-auto p-6 mt-8 bg-white rounded-lg shadow-md"> 
-        <h2 class="text-2xl font-semibold mb-4">Bem-vindo à sua página de 
-receitas!</h2> 
-        <p class="text-lg text-gray-700">Aqui você poderá organizar e 
-compartilhar suas receitas favoritas.</p> 
-<p class="mt-4 text-gray-600">Este é o início da sua jornada culinária com 
-Django.</p> 
-</main>  -->
-<!-- Rodapé (opcional, para futuras adições) --> 
-<footer class="mt-12 p-6 text-center text-gray-600"> 
-<p>&copy; 2025 Minhas Receitas. Todos os direitos reservados a 
-Silvano.</p> 
-</footer> 
-</body> 
-</html>
+<!-- Seção de pesquisa -->
+ <section class="container mx-auto mt-8 p-4 flex justify-center">
+    <form method="get" action="{% url 'pesquisar_receitas' %}" class="w-full max-w-lg flex bg-white rounded-full shadow-md overflow-hidden">
+        <input 
+            type="text"
+            name="q"
+            placeholder="Pesquisar receitas..."
+            class="flex-grow p-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-500 rounded-l-full pl-5">
+        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white p-3 px-6 py-2 rounded-r-full  transition duration-300 ease-in-out flex items-center justify-center">
+            <i class="fas fa-search mr-2"></i> Pesquisar
+        </button>
+    </form>
+</section>
+    <!-- Listas de Receitas -->
+    <h2 class="text-2xl font-semibold mb-6 text-center mt-8">Nossas últimas receitas</h2>
+    <div class="flex flex-wrap justify-center gap-6">
+        
+            {% for receita in receitas %}
+
+            <div class="w-full sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-1.5rem)] bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
+                
+                {% if receita.image %}
+
+                <img src="{{ receita.image.url }}" alt="Imagem de {{ receita.title }}" class="w-full h-48 object-cover rounded-md mb-4">
+
+                {% endif %}
+
+                
+                <h3 class="text-xl font-bold mb-2 text-gray-800">{{ receita.title }}</h3>
+                <p class="text-gray-600 mb-4">{{ receita.description|truncatewords:20}}</p>
+                
+                <a href="{% url 'receita_detail' receita.id %}" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4
+                rounded-full transition-colors duration-300">
+                Ver Receita &rarr;
+                </a>
+            </div>
+                {% empty %}
+            
+                <p class="text-center text-gray-500 col-span-full">Nenhuma receita encontrada</p>
+                
+            {% endfor %}
+    </div>
+
+        {% endblock %}
